@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>TLS Blutspende</title>
+</head>
+<body>
+    {% if current_user.id %} {# If User is logged in #}
+    <p>Hello, {{ current_user.name }}! You're logged in!</p>
+    <p>Email: {{ current_user.email }}</p>
+    <a class="button" href="/logout">Logout</a>
+
+    {% else %} {# If user isn't logged in #}
+    <a class="button" href="/loginiserv">IServ Login</a>
+    <div class="box">
+        <form method="POST" action="/login">
+            <div class="field">
+                <div class="control">
+                    <input type="text" name="name" placeholder="Name" value="{{ request.form.name }}">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="email" name="email" placeholder="Email" autofocus="" value="{{ request.form.email }}">
+                </div>
+            </div>
+
+            <button class="button">Fortfahren</button>
+        </form>
+    </div>
+    {% endif %}
+
+</body>
+</html>
