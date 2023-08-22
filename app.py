@@ -15,10 +15,9 @@ from flask_login import (
 from oauthlib.oauth2 import WebApplicationClient
 from dotenv import load_dotenv
 
-
 # Internal imports
 from user import User
-from utils import new_uid, check_spender
+from utils import new_uid, check_spender, get_iserv_provider_cfg
 
 load_dotenv()
 
@@ -52,40 +51,12 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    return render_template("login.html")
-    # if current_user.is_authenticated:
-    #     return (
-    #         "<p>Hello, {}! You're logged in!\nEmail: {}</p>"
-    #         '<a class="button" href="/logout">Logout</a>'.format(
-    #             current_user.name, current_user.email
-    #         )
-    #     )
-    # else:
-    #     return ('<a class="button" href="/loginiserv">IServ Login</a>'
-    #             '<div data-role="fieldcontain" >'
-    #             '<fieldset >'
-    #             '<label for="name"> Voller Name </label>'
-    #             '<input type="text" name="name" id="name" focus >'
-    #             '<label for="email"> E-Mail </label>'
-    #             '<input type="text" name="email" id="email">'
-    #             '<a class="button" href="/login">Weiter</a>>'
-    #             '</fieldset >'
-    #             '</div >')
+    print("AUTH", current_user.is_authenticated)
+    if current_user.is_authenticated:
+        return render_template("questions.html")
 
-
-@app.route("/loginiserv")
-def loginiserv():
-    # Find out what URL to hit for iserv login
-    iserv_provider_cfg = get_iserv_provider_cfg()
-    authorization_endpoint = iserv_provider_cfg["authorization_endpoint"]
-
-    # Use library to construct the request for iserv login and provide
-    # scopes that let you retrieve user's profile from iserv
-    return redirect(client.prepare_request_uri(
-        authorization_endpoint,
-        redirect_uri=request.base_url + "/callback",
-        scope=["openid", "email", "profile"],
-    ))
+    else:
+        return render_template("login.html")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -112,7 +83,22 @@ def login():
     return redirect(url_for("index"))
 
 
-@app.route("/loginiserv/callback")
+@app.route("/iservlogin")
+def iservlogin():
+    # Find out what URL to hit for iserv login
+    iserv_provider_cfg = get_iserv_provider_cfg()
+    authorization_endpoint = iserv_provider_cfg["authorization_endpoint"]
+
+    # Use library to construct the request for iserv login and provide
+    # scopes that let you retrieve user's profile from iserv
+    return redirect(client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url + "/callback",
+        scope=["openid", "email", "profile"],
+    ))
+
+
+@app.route("/iservlogin/callback")
 def callback():
     # Get authorization code iserv sent back to you
     code = request.args.get("code")
@@ -165,15 +151,13 @@ def callback():
 
 @app.route("/logout")
 def logout():
-    print("called")
     logout_user()
-    print("logged out")
     return redirect(url_for("index"))
 
 
-def get_iserv_provider_cfg():
-    return requests.get(ISERV_DISCOVERY_URL).json()
-
+@app.route("/termine", methods=['GET', 'POST'])
+def termine():
+    return render_template("termine.html")
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")

@@ -1,6 +1,11 @@
 import random
 import string
+import requests
+import os
 from db import session, Spender
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def new_uid():
@@ -25,3 +30,7 @@ def check_spender(mail):
 
     if not spender:
         return None
+
+
+def get_iserv_provider_cfg():
+    return requests.get(os.getenv("ISERV_DISCORVERY_URL")).json()

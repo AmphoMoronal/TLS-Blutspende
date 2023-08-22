@@ -5,13 +5,7 @@
     <title>TLS Blutspende</title>
 </head>
 <body>
-    {% if current_user.id %} {# If User is logged in #}
-    <p>Hello, {{ current_user.name }}! You're logged in!</p>
-    <p>Email: {{ current_user.email }}</p>
-    <a class="button" href="/logout">Logout</a>
-
-    {% else %} {# If user isn't logged in #}
-    <a class="button" href="/loginiserv">IServ Login</a>
+    <a class="button" href="/iservlogin">IServ Login</a>
     <div class="box">
         <form method="POST" action="/login">
             <div class="field">
@@ -29,7 +23,5 @@
             <button class="button">Fortfahren</button>
         </form>
     </div>
-    {% endif %}
-
 </body>
 </html>

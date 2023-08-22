@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>TLS Blutspende</title>
 </head>
 <body>
-$END$
+<form method="POST" action="/termine">
+
+    {#  erstspender  #}
+
+    <div class="card" style="margin:50px 0">
+        <div class="card-header"><b>Sind Sie Erstspender?</b></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ja
+                <label class="switch ">
+                    <input type="checkbox" name="Ja" class="danger" value= {{ request.form.first_time }}>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item">Nein
+                <label class="switch ">
+                    <input type="checkbox" name="Nein" class="danger">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    {#  Volljährig  #}
+    <div class="card" style="margin:50px 0">
+        <div class="card-header"><b>Sind Sie im Alter zwischen 18 und 60 Jahre?</b></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ja
+                <label class="switch ">
+                    <input type="checkbox" name="Ja" class="danger" value= {{ request.form.adult }}>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item">Nein
+                <label class="switch ">
+                    <input type="checkbox" name="Nein" class="danger">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    {#  Gewicht 50kg  #}
+
+    <div class="card" style="margin:50px 0">
+        <div class="card-header"><b>Wiegen Sie über 50kg?</b></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ja
+                <label class="switch ">
+                    <input type="checkbox" name="Ja" class="danger" value= {{ request.form.weight }}>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item">Nein
+                <label class="switch ">
+                    <input type="checkbox" name="Nein" class="danger">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    {#  gesund  #}
+
+    <div class="card" style="margin:50px 0">
+        <div class="card-header"><b>Fühlen Sie sich gesund?</b></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ja
+                <label class="switch ">
+                    <input type="checkbox" name="Ja" class="danger" value= {{ request.form.healthy }}>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item">Nein
+                <label class="switch ">
+                    <input type="checkbox" name="Nein" class="danger">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+        <button type="submit">Go</button>
+    </div>
+
+    <h3>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass!</h3>
+    <h3>Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</h3>
+</form>
 </body>
 </html>
