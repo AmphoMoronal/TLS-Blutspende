@@ -87,6 +87,29 @@
         <button type="submit">Go</button>
     </div>
 
+    {#  tattoos  #}
+
+    <div class="card" style="margin:50px 0">
+        <div class="card-header"><b>Wurde Ihnen in den letzten vier Monaten Tattoos oder Piercings gestochen
+            (auch Ohrringe)?</b></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ja
+                <label class="switch ">
+                    <input type="checkbox" name="Ja" class="danger" value= {{ request.form.healthy }}>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+            <li class="list-group-item">Nein
+                <label class="switch ">
+                    <input type="checkbox" name="Nein" class="danger">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        </ul>
+        <button type="submit">Go</button>
+    </div>
+
+
     <h3>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass!</h3>
     <h3>Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</h3>
 </form>
