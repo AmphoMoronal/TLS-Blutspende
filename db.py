@@ -24,10 +24,11 @@ class Spender(Base):
     email = Column(String, unique=True)
     user_id = Column(String, unique=True)
     is_authenticated = Column(Boolean, default=True)
-    adult = Column(Boolean)
-    weight = Column(Boolean)
-    healthy = Column(Boolean)
-    first_time = Column(Boolean)
+    first_time = Column(Boolean, default=False)
+    adult = Column(Boolean, default=False)
+    weight = Column(Boolean, default=False)
+    healthy = Column(Boolean, default=False)
+    tattoos = Column(Boolean, default=False)
 
     def __repr__(self) -> str:
         return f"Spender(id={self.user_id!r}, name={self.name!r}, email={self.email!r}, user_id={self.user_id}," \

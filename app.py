@@ -15,9 +15,10 @@ from flask_login import (
 from oauthlib.oauth2 import WebApplicationClient
 from dotenv import load_dotenv
 
+import utils
 # Internal imports
 from user import User
-from utils import new_uid, check_spender, get_iserv_provider_cfg
+from utils import new_uid, check_spender, get_iserv_provider_cfg, push_anwers
 
 load_dotenv()
 
@@ -138,7 +139,7 @@ def callback():
         id_=unique_id, name=users_name, email=users_email
     )
 
-    # Doesn't exist? Add it to the database.
+    # User doesn't exist? Add it to the database.
     if not User.get(unique_id):
         User.create(unique_id, users_name, users_email)
 
@@ -157,6 +158,13 @@ def logout():
 
 @app.route("/termine", methods=['GET', 'POST'])
 def termine():
+    first_time: bool = bool(request.form.get('first_time'))
+    adult: bool = bool(request.form.get('adult'))
+    weight: bool = bool(request.form.get('weight'))
+    healthy: bool = bool(request.form.get('healthy'))
+    tattoos: bool = bool(request.form.get('tattoos'))
+    push_anwers(current_user.user_id, first_time, adult, weight, healthy, tattoos)
+
     return render_template("termine.html")
 
 if __name__ == "__main__":
