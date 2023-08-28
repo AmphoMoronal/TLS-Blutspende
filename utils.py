@@ -34,3 +34,13 @@ def check_spender(mail):
 
 def get_iserv_provider_cfg():
     return requests.get(os.getenv("ISERV_DISCORVERY_URL")).json()
+
+
+def push_anwers(user_id, first_time, adult, weight, healthy, tattoos):
+    spender = session.query(Spender).filter(Spender.user_id == user_id).first()
+    spender.first_time = first_time
+    spender.adult = adult
+    spender.weight = weight
+    spender.healthy = healthy
+    spender.tattoos = tattoos
+    session.commit()
