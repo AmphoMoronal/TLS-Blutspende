@@ -52,7 +52,6 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    print("AUTH", current_user.is_authenticated)
     if current_user.is_authenticated:
         return redirect(url_for("questions"))
 
