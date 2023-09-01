@@ -60,11 +60,6 @@ def index():
         return render_template("login.html")
 
 
-@app.route("/questions")
-def questions():
-    return render_template("questions.html")
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     users_name = request.form["name"]
@@ -161,31 +156,52 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/checkdonator", methods=['GET', 'POST'])
-def checkdonator():
-    first_time: bool = bool(request.form.get('first_time'))
-    adult: bool = bool(request.form.get('adult'))
-    weight: bool = bool(request.form.get('weight'))
-    healthy: bool = bool(request.form.get('healthy'))
-    tattoos: bool = bool(request.form.get('tattoos'))
-
-    push_anwers(current_user.user_id, first_time, adult, weight, healthy, tattoos)  # push answers into database
-
-    values = [adult, weight, healthy, tattoos]
-    not_donatable = []
-    for value in values:
-        if not value:
-            not_donatable.append(value)
-
-        else:
-            pass
-
-    if not_donatable:
-        return render_template("not_donatable.html")
+@app.route("/questions")
+def questions():
+    if current_user.is_authenticated:
+        return render_template("questions.html")
 
     else:
+        return redirect(url_for("index"))
+
+
+@app.route("/checkdonator", methods=['GET', 'POST'])
+def checkdonator():
+    if current_user.is_authenticated:
+        first_time: bool = bool(request.form.get('first_time'))
+        adult: bool = bool(request.form.get('adult'))
+        weight: bool = bool(request.form.get('weight'))
+        healthy: bool = bool(request.form.get('healthy'))
+        tattoos: bool = bool(request.form.get('tattoos'))
+
+        push_anwers(current_user.user_id, first_time, adult, weight, healthy, tattoos)  # push answers into database
+
+        values = [adult, weight, healthy, tattoos]
+        not_donatable = []
+        for value in values:
+            if not value:
+                not_donatable.append(value)
+
+            else:
+                pass
+
+        if not_donatable:
+            return render_template("not_donatable.html")
+
+        else:
+            return redirect(url_for("termine"))
+
+    else:
+        return redirect(url_for("index"))
+
+
+@app.route("/termine")
+def termine():
+    if current_user.is_authenticated:
         return render_template("termine.html")
 
+    else:
+        return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")
