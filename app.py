@@ -31,16 +31,13 @@ ISERV_DISCOVERY_URL = os.getenv("ISERV_DISCORVERY_URL")
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY") or os.urandom(24)
 
+
 # User session management setup
-# https://flask-login.readthedocs.io/en/latest
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# Naive database setup
-# init_db_command()
 
-
-# OAuth 2 client setup
+# OAuth client setup
 client = WebApplicationClient(ISERV_CLIENT_ID)
 
 
@@ -50,11 +47,14 @@ def load_user(user_id):
     return User.get(user_id)
 
 
+# Index route which is the first route the users see
 @app.route("/")
 def index():
+    # user logged in
     if current_user.is_authenticated:
         return redirect(url_for("questions"))
 
+    # user not logged in
     else:
         return render_template("login.html")
 
@@ -72,7 +72,7 @@ def login():
         id_=unique_id, name=users_name, email=users_email
     )
 
-    # Doesn't exist? Add it to the database.
+    # Add User to the database
     if not User.get(unique_id):
         User.create(unique_id, users_name, users_email)
 
@@ -89,8 +89,8 @@ def iservlogin():
     iserv_provider_cfg = get_iserv_provider_cfg()
     authorization_endpoint = iserv_provider_cfg["authorization_endpoint"]
 
-    # Use library to construct the request for iserv login and provide
-    # scopes that let you retrieve user's profile from iserv
+    # Use library to construct the request for iserv login and provide scopes that let you
+    # retrieve user's profile from iserv
     return redirect(client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=request.base_url + "/callback",
@@ -103,8 +103,7 @@ def callback():
     # Get authorization code iserv sent back to you
     code = request.args.get("code")
 
-    # Find out what URL to hit to get tokens that allow you to ask for
-    # things on behalf of a user
+    # Find out what URL to hit to get tokens that allow you to ask for things on behalf of a user
     iserv_provider_cfg = get_iserv_provider_cfg()
     token_endpoint = iserv_provider_cfg["token_endpoint"]
 
@@ -175,6 +174,7 @@ def checkdonator():
 
         push_anwers(current_user.user_id, first_time, adult, weight, healthy, tattoos)  # push answers into database
 
+        # checks if the blood is donatable
         values = [adult, weight, healthy, tattoos]
         not_donatable = []
         for value in values:
