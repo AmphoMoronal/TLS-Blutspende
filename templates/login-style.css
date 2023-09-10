@@ -15,6 +15,18 @@ body {
     align-items: center;
 }
 
+.Blood-LeftBottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.Blood-RightTop {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 main {
     background-color: white;
     display: flex;
@@ -26,15 +38,16 @@ main {
     border-radius: 25px;
 }
 
-main .box-top {
-    width: 100%;
-    height: 50%;
+main .box {
+    width: 80%;
+    height: 100%;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-main .box-top .login-form {
+main .box .login-form {
     width: 100%;
     height: 100%;
     display: flex;
@@ -43,21 +56,18 @@ main .box-top .login-form {
     justify-content: space-between;
 }
 
-main .box-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .input-style1 {
-    width: 80%;
+    width: 100%;
     color: #A60F0F;
-    font-size: medium;
+    font-size: large;
+    font-weight: 500;
     border: none;
-    border-bottom: 2px solid #A60F0F;
+    border-bottom: 3px solid #A60F0F;
 }
 
 .btn-style1 {
+    border: none;
+    text-align: center;
     color: white;
     background-color: #A60F0F;
     padding: 20px;

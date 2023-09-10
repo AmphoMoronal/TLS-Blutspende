@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>TLS Blutspende</title>
-    <link rel="stylesheet" href="login-style.css">
+    <link rel="stylesheet" href="login-style.css">   
 </head>
 
 <body>
+    <img src="img/Blood-LeftBottom.svg" class="Blood-LeftBottom">
     <main>
-        <div class="box-top">
+        <div class="box">
             <form class="login-form" method="POST" action="/login">
                 <h1>TEXT</h1>
 
@@ -18,14 +19,16 @@
                 <input class="input-style1" type="email" name="email" placeholder="max.mustermann@tls-giessen.eu">
 
                 <button class="button btn-style1">Fortfahren</button>
+
+                <hr>
+
+                <img class="iserv-logo" src="img/ISERV.svg" alt="IServ-Logo">
+                
+                <a class="button btn-style1" href="/iservlogin">Daten über IServ importieren</a>
             </form>
         </div>
-
-        <div class="box-bottom">
-            <img class="iserv-logo" src="img/ISERV.svg" alt="IServ-Logo">
-            <a class="button btn-style1" href="/iservlogin">Daten über IServ importieren</a>
-        </div>
     </main>
+    <img src="img/Blood-RightTop.svg" class="Blood-RightTop">
 </body>
 
 </html>
