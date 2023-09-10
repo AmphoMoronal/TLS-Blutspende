@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <title>TLS Blutspende</title>
+    <link rel="stylesheet" href="login-style.css">
 </head>
+
 <body>
-    <a class="button" href="/iservlogin">IServ Login</a>
-    <div class="box">
-        <form method="POST" action="/login">
-            <div class="field">
-                <div class="control">
-                    <input type="text" name="name" placeholder="Name" value="{{ request.form.name }}">
-                </div>
-            </div>
+    <main>
+        <div class="box-top">
+            <form class="login-form" method="POST" action="/login">
+                <h1>TEXT</h1>
 
-            <div class="field">
-                <div class="control">
-                    <input type="email" name="email" placeholder="Email" autofocus="" value="{{ request.form.email }}">
-                </div>
-            </div>
+                <input class="input-style1" type="text" name="name" placeholder="Maximilian Mustermann">
 
-            <button class="button">Fortfahren</button>
-        </form>
-    </div>
+                <input class="input-style1" type="email" name="email" placeholder="max.mustermann@tls-giessen.eu">
+
+                <button class="button btn-style1">Fortfahren</button>
+            </form>
+        </div>
+
+        <div class="box-bottom">
+            <img class="iserv-logo" src="img/ISERV.svg" alt="IServ-Logo">
+            <a class="button btn-style1" href="/iservlogin">Daten über IServ importieren</a>
+        </div>
+    </main>
 </body>
+
 </html>
