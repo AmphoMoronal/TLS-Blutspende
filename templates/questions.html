@@ -3,114 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <title>TLS Blutspende</title>
+
+    <link rel="stylesheet" href="../static/css/questions-style.css">
 </head>
 <body>
-<form method="POST" action="/checkdonator">
+    <img src="../static/img/Blood-LeftBottom.svg" class="Blood-LeftBottom">
+    <main>
+        <form method="POST" action="/checkdonator">
+        
+            {#  Erstspender  #}
+        
+            <div class="card" style="margin:50px 0">
+                <div class="card-header"><b>Sind Sie Erstspender?</b></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ja
+                        <label class="switch ">
+                            <input type="checkbox" name="first_time" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">Nein
+                        <label class="switch ">
+                            <input type="checkbox" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        
+            {#  Volljährig  #}
+            <div class="card" style="margin:50px 0">
+                <div class="card-header"><b>Sind Sie im Alter zwischen 18 und 60 Jahre?</b></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ja
+                        <label class="switch ">
+                            <input type="checkbox" name="adult" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">Nein
+                        <label class="switch ">
+                            <input type="checkbox" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        
+            {#  Gewicht 50kg  #}
+        
+            <div class="card" style="margin:50px 0">
+                <div class="card-header"><b>Wiegen Sie über 50kg?</b></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ja
+                        <label class="switch ">
+                            <input type="checkbox" name="weight" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">Nein
+                        <label class="switch ">
+                            <input type="checkbox" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        
+            {#  gesund  #}
+        
+            <div class="card" style="margin:50px 0">
+                <div class="card-header"><b>Fühlen Sie sich gesund?</b></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ja
+                        <label class="switch ">
+                            <input type="checkbox" name="healthy" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">Nein
+                        <label class="switch ">
+                            <input type="checkbox" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
 
-    {#  erstspender  #}
+            {#  tattoos  #}
 
-    <div class="card" style="margin:50px 0">
-        <div class="card-header"><b>Sind Sie Erstspender?</b></div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Ja
-                <label class="switch ">
-                    <input type="checkbox" name="first_time" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-            <li class="list-group-item">Nein
-                <label class="switch ">
-                    <input type="checkbox" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-        </ul>
-    </div>
-
-    {#  Volljährig  #}
-    <div class="card" style="margin:50px 0">
-        <div class="card-header"><b>Sind Sie im Alter zwischen 18 und 60 Jahre?</b></div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Ja
-                <label class="switch ">
-                    <input type="checkbox" name="adult" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-            <li class="list-group-item">Nein
-                <label class="switch ">
-                    <input type="checkbox" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-        </ul>
-    </div>
-
-    {#  Gewicht 50kg  #}
-
-    <div class="card" style="margin:50px 0">
-        <div class="card-header"><b>Wiegen Sie über 50kg?</b></div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Ja
-                <label class="switch ">
-                    <input type="checkbox" name="weight" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-            <li class="list-group-item">Nein
-                <label class="switch ">
-                    <input type="checkbox" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-        </ul>
-    </div>
-
-    {#  gesund  #}
-
-    <div class="card" style="margin:50px 0">
-        <div class="card-header"><b>Fühlen Sie sich gesund?</b></div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Ja
-                <label class="switch ">
-                    <input type="checkbox" name="healthy" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-            <li class="list-group-item">Nein
-                <label class="switch ">
-                    <input type="checkbox" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-        </ul>
-    </div>
-
-    {#  tattoos  #}
-
-    <div class="card" style="margin:50px 0">
-        <div class="card-header"><b>Wurde Ihnen in den letzten vier Monaten Tattoos oder Piercings gestochen
-            (auch Ohrringe)?</b></div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Ja
-                <label class="switch ">
-                    <input type="checkbox" name="tattoos" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-            <li class="list-group-item">Nein
-                <label class="switch ">
-                    <input type="checkbox" class="danger">
-                    <span class="slider round"></span>
-                </label>
-            </li>
-        </ul>
-        <button type="submit">Go</button>
-    </div>
+            <div class="card" style="margin:50px 0">
+                <div class="card-header"><b>Wurde Ihnen in den letzten vier Monaten Tattoos oder Piercings gestochen (auch Ohrringe)?</b></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ja
+                        <label class="switch ">
+                            <input type="checkbox" name="tattoos" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">Nein
+                        <label class="switch ">
+                            <input type="checkbox" class="danger">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </ul>
+                <button type="submit">Go</button>
+            </div>
 
 
-    <h3>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass!</h3>
-    <h3>Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</h3>
-</form>
+            <h3>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass!</h3>
+            <h3>Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</h3>
+        </form>
+    </main>
+    <img src="../static/img/Blood-RightTop.svg" class="Blood-RightTop">
 </body>
 </html>
