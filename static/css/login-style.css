@@ -65,6 +65,7 @@ body {
 }
 
 main {
+    z-index: 10;
     background-color: var(--main-white-color);
     display: flex;
     flex-direction: column;
