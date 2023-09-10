@@ -19,16 +19,28 @@
     border-bottom: 3px solid var(--main-bloody-red-color);
 }
 
+.input-style1:focus {
+    outline: none;
+}
+
 .btn-style1 {
     border: none;
     text-align: center;
     color: white;
     background-color: var(--main-bloody-red-color);
+    border: 4px solid var(--main-bloody-red-color);
     padding: 20px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     font-size: large;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.btn-style1:hover {
+    background-color: var(--main-white-color);
+    color: var(--main-bloody-red-color);
 }
 
 body {

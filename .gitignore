@@ -18,6 +18,8 @@ build/
 docs/_build/
 .vscode
 Flyer/
+AdobeXD-Designs.xd
+test.db
 
 # Coverage reports
 htmlcov/
