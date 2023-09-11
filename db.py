@@ -7,9 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-engine = create_engine(
-    f'postgresql://{os.getenv("PSQL_USER")}:{os.getenv("PSQL_PASSWORD")}@{os.getenv("PSQL_HOST")}/'
-    f'{os.getenv("PSQL_TABLE")}', echo=True)
+engine = create_engine("sqlite:///test.db")
 
 Session = sessionmaker(bind=engine)
 session = Session()

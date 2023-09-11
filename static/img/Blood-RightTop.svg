@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="522" height="697.139" viewBox="0 0 522 697.139">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d93030;
+      }
+
+      .cls-2 {
+        fill: #a60f0f;
+      }
+    </style>
+  </defs>
+  <g id="Blutfleck1" transform="translate(-1397)">
+    <path id="Pfad_1" data-name="Pfad 1" class="cls-1" d="M1397,0s225,151,199,226-80,134,72,308,251,163,251,163V0Z"/>
+    <path id="Pfad_2" data-name="Pfad 2" class="cls-2" d="M1397,0s204.31,137.115,180.7,205.218S1505.057,326.9,1643.08,484.9,1871,632.908,1871,632.908V0Z" transform="translate(48)"/>
+  </g>
+</svg>
