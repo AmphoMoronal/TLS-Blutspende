@@ -6,6 +6,54 @@
 
     <link rel="stylesheet" href="../static/css/questions-style.css">
 </head>
+
+<script>
+    function toggleCheck(checkbox) {
+        // Suchen Sie das übergeordnete <div> des geänderten Kontrollkästchens
+        var parentDiv = checkbox.closest('.card');
+
+        // Durchlaufen Sie die Checkboxen innerhalb des übergeordneten <div>
+        var checkboxes = parentDiv.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false; // Anderes Kontrollkästchen abwählen
+            }
+        }
+    }
+
+    function checkButtons() {
+            var cards = document.querySelectorAll('.card');
+            var button = document.getElementById('weiterbtn');
+            var allCardsHaveCheckboxChecked = true;
+
+            // Überprüfen, ob in jedem .card-Div mindestens eine Checkbox ausgewählt ist
+            for (var i = 0; i < cards.length; i++) {
+                var checkboxes = cards[i].querySelectorAll('input[type="checkbox"]');
+                var atLeastOneChecked = false;
+
+                // Überprüfen, ob mindestens eine Checkbox in diesem .card-Div ausgewählt ist
+                for (var j = 0; j < checkboxes.length; j++) {
+                    if (checkboxes[j].checked) {
+                        atLeastOneChecked = true;
+                        break; // Wenn mindestens eine Checkbox ausgewählt ist, abbrechen
+                    }
+                }
+
+                if (!atLeastOneChecked) {
+                    allCardsHaveCheckboxChecked = false;
+                    break; // Wenn mindestens ein .card-Div keine ausgewählte Checkbox hat, abbrechen
+                }
+            }
+
+            // Button aktivieren oder deaktivieren und Design ändern
+            if (allCardsHaveCheckboxChecked) {
+                button.disabled = false;
+            } else {
+                button.disabled = true;
+            }
+        }
+</script>
+
 <body>
     <img src="../static/img/Blood-LeftBottom.svg" class="Blood-LeftBottom">
     <main>
@@ -15,12 +63,12 @@
                 <b>Sind Sie Erstspender?</b>
                 <div class="answer">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="first_time" class="checkbox-ja">
+                        <input type="checkbox" id="option1" name="first_time group1" onchange="toggleCheck(this), checkButtons()" class="checkbox-ja">
                         <span class="checkbox">JA</span>
                     </label>
                 
                     <label class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-nein">
+                        <input type="checkbox" id="option2" name="group1" onchange="toggleCheck(this), checkButtons()" class="checkbox-nein">
                         <span class="checkbox">NEIN</span>
                     </label>
                 </div>
@@ -30,12 +78,12 @@
                 <b>Sind Sie im Alter zwischen 18 und 60 Jahre?</b>
                 <div class="answer">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="first_time" class="checkbox-ja">
+                        <input type="checkbox" id="option1" name="first_time group2" onchange="toggleCheck(this), checkButtons()" class="checkbox-ja">
                         <span class="checkbox">JA</span>
                     </label>
                 
                     <label class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-nein">
+                        <input type="checkbox" id="option2" name="group2" onchange="toggleCheck(this), checkButtons()" class="checkbox-nein">
                         <span class="checkbox">NEIN</span>
                     </label>
                 </div>
@@ -45,12 +93,12 @@
                 <b>Wiegen Sie über 50kg?</b>
                 <div class="answer">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="first_time" class="checkbox-ja">
+                        <input type="checkbox" id="option1" name="first_time group3" onchange="toggleCheck(this), checkButtons()" class="checkbox-ja">
                         <span class="checkbox">JA</span>
                     </label>
                 
                     <label class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-nein">
+                        <input type="checkbox" id="option2" name="group3" onchange="toggleCheck(this), checkButtons()" class="checkbox-nein">
                         <span class="checkbox">NEIN</span>
                     </label>
                 </div>
@@ -60,12 +108,12 @@
                 <b>Fühlen Sie sich gesund?</b>
                 <div class="answer">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="first_time" class="checkbox-ja">
+                        <input type="checkbox" id="option1" name="first_time group4" onchange="toggleCheck(this), checkButtons()" class="checkbox-ja">
                         <span class="checkbox">JA</span>
                     </label>
-                    
+                
                     <label class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-nein">
+                        <input type="checkbox" id="option2" name="group4" onchange="toggleCheck(this), checkButtons()" class="checkbox-nein">
                         <span class="checkbox">NEIN</span>
                     </label>
                 </div>
@@ -75,20 +123,19 @@
                 <b>Wurde Ihnen in den letzten vier Monaten Tattoos oder Piercings gestochen (auch Ohrringe)?</b>
                 <div class="answer">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="first_time" class="checkbox-ja">
+                        <input type="checkbox" id="option1" name="first_time group5" onchange="toggleCheck(this), checkButtons()" class="checkbox-ja">
                         <span class="checkbox">JA</span>
                     </label>
                 
                     <label class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-nein">
+                        <input type="checkbox" id="option2" name="group5" onchange="toggleCheck(this), checkButtons()" class="checkbox-nein">
                         <span class="checkbox">NEIN</span>
                     </label>
                 </div>
+            </div>
+            <button id="weiterbtn" class="btn-style1 weiterbtn" type="submit" disabled>Weiter</button>
 
-            <button class="btn-style1" type="submit">Weiter</button>
-
-            <h3>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass!</h3>
-            <h3>Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</h3>
+            <p>Denken Sie an Ihren gültigen Personalausweis oder einen gültigen Reisepass! <br> Vergessen Sie nicht vor und nach der Blutspende genug zu trinken!</p>
         </form>
     </main>
     <img src="../static/img/Blood-RightTop.svg" class="Blood-RightTop">
