@@ -4,12 +4,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Ubuntu', sans-serif;
-
-    --main-background-color: #D97E7E;
-    --main-bloody-red-color: #A60F0F;
-    --main-white-color: #ffffff;
-    --main-light-grey-color: #737373;
-    --main-grey-color: #595959;
 }
 
 body {
@@ -68,15 +62,15 @@ input[type="checkbox"] {
 }
 
 .checkbox-ja:checked + span {
-    background-color: #94BF36;
-    color: #375915;
-    border-color: #375915;
+    background-color: var(--main-light-green-color);
+    color: var(--main-green-color);
+    border-color: var(--main-green-color);
 }
 
 .checkbox-nein:checked + span {
-    background-color: #BF0F0F;
-    color: #590202;
-    border-color: #590202;
+    background-color: var(--main-bloody-red-color);
+    color: var(--main-dark-red-color);
+    border-color: var(--main-dark-red-color);
 }
 
 .btn-style1 {

@@ -4,10 +4,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Ubuntu', sans-serif;
-
-    --main-background-color: #D97E7E;
-    --main-bloody-red-color: #A60F0F;
-    --main-white-color: white;
 }
 
 .input-style1 {
@@ -109,4 +105,12 @@ hr {
 
 .iserv-logo {
     margin: 0 10% 0 10%;
+}
+
+@media (max-width: 1024px) {
+    /* CSS-Anpassungen für mittlere Bildschirme (Tablets) */
+}
+
+@media (max-width: 768px) {
+    /* CSS-Anpassungen für kleine Bildschirme */
 }
