@@ -37,8 +37,8 @@ class Appointments(Base):
     __tablename__ = "termine"
     id = Column(Integer, primary_key=True)
     date = Column(String(10))
-    time = Column(Integer)
-    spender_count = Column(Integer, default=0)
+    time = Column(Integer(4))
+    spender_count = Column(Integer(1), default=0)
     spender1 = Column(String(50))
     spender1_mail = Column(String(50))
     spender2 = Column(String(50))
