@@ -33,13 +33,26 @@ class Spender(Base):
                f" adult={self.adult}, is_authenticated={self.is_authenticated})"
 
 
-class Termine(Base):
+class Appointments(Base):
     __tablename__ = "termine"
-    time = Column(String(5), primary_key=True)
-    spender = Column(String(50))
-    spender_mail = Column(String(50))
+    id = Column(Integer, primary_key=True)
+    date = Column(String(10))
+    time = Column(Integer(4))
+    spender_count = Column(Integer(1), default=0)
+    spender1 = Column(String(50))
+    spender1_mail = Column(String(50))
+    spender2 = Column(String(50))
+    spender2_mail = Column(String(50))
+    spender3 = Column(String(50))
+    spender3_mail = Column(String(50))
+    spender4 = Column(String(50))
+    spender4_mail = Column(String(50))
 
     def __repr__(self) -> str:
-        return f"Termine(zeit={self.time!r}, spender={self.spender!r}), spender_mail={self.spender_mail!r}"
+        return (f"Appointments(date={self.date!r}, time={self.time!r},"
+                f"spender1={self.spender!r}), spender1_mail={self.spender_mail!r},"
+                f"spender2={self.spender2!r}, spender2_mail={self.spender2_mail!r},"
+                f"spender3={self.spender3!r}, spender3_mail={self.spender3_mail!r},"
+                f"spender4={self.spender4!r}, spender4_mail={self.spender4_mail!r}")
 
 Base.metadata.create_all(engine)
