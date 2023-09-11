@@ -34,6 +34,12 @@ class Appointment:
     def get_appointment(date):
         dates = []
         appointments = session.query(Appointments).filter(Appointments.date == date).all()
+
+    @staticmethod
+    def get_dates():
+        dates = []
+        appointments = session.query(Appointments).all()
+
         for appointment in appointments:
             if appointment.date not in dates:
                 dates.append(appointment.date)
@@ -68,5 +74,3 @@ class Appointment:
             return None
 
         return appointment
-
-
