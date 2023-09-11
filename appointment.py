@@ -27,28 +27,23 @@ class Appointment:
         return appointment
 
     @staticmethod
-<<<<<<< HEAD
     def get_one(date, time):
         appointment = session.query(Appointments).filter(Appointments.date == date, Appointments.time == time).first()
-=======
-    def get_one(time):
-        appointment = session.query(Appointments).filter(Appointments.time == time).first()
->>>>>>> 499fe1c (add appointments)
         if not appointment:
             return None
 
         return appointment
 
     @staticmethod
-<<<<<<< HEAD
     def get_appointment(date):
         dates = []
         appointments = session.query(Appointments).filter(Appointments.date == date).all()
-=======
+
+    @staticmethod
     def get_dates():
         dates = []
         appointments = session.query(Appointments).all()
->>>>>>> 499fe1c (add appointments)
+
         for appointment in appointments:
             if appointment.date not in dates:
                 dates.append(appointment.date)
@@ -67,7 +62,6 @@ class Appointment:
                 termin = Termin(date=date, time=time)
                 session.add(termin)
             session.commit()
-<<<<<<< HEAD
 
     @staticmethod
     def delete_appointment(date):
@@ -84,7 +78,3 @@ class Appointment:
             return None
 
         return appointment
-
-
-=======
->>>>>>> 499fe1c (add appointments)
