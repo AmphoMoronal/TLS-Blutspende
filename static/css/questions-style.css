@@ -10,6 +10,51 @@
     --main-white-color: white;
 }
 
+.btn-style1 {
+    border: none;
+    text-align: center;
+    color: white;
+    background-color: var(--main-bloody-red-color);
+    border: 4px solid var(--main-bloody-red-color);
+    padding: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.btn-style1:hover {
+    background-color: var(--main-white-color);
+    color: var(--main-bloody-red-color);
+}
+
+.answer {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox {
+    user-select: none;
+    border: 2px solid #262626;
+    background-color: #696768;
+    color: #262626;
+    padding: 10px 50px;
+}
+
+.checkbox-ja:checked + span {
+    background-color: #214001;
+}
+
+.checkbox-nein:checked + span {
+    background-color: red;
+}
+
 body {
     width: 100%;
     height: 100vh;
