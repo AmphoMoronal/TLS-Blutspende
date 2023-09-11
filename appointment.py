@@ -4,11 +4,7 @@ from db import session, Appointments
 """
 
 The appointments are always from 10:00 a.m. to 3:00 p.m. 
-<<<<<<< HEAD
 You can process 4 donors every quarter. -> 16 donors per hour -> 50 donors per appointment
-=======
-You can process 4 donors every quarter. -> 16 donaters per hour -> 50 donators per appointment
->>>>>>> 499fe1c (add appointments)
 
 """
 
