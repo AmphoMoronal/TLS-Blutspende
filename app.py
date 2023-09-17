@@ -166,16 +166,14 @@ def questions():
 @app.route("/checkdonator", methods=['GET', 'POST'])
 def checkdonator():
     if current_user.is_authenticated:
-        first_time: bool = bool(request.form.get('first_time'))
         adult: bool = bool(request.form.get('adult'))
         weight: bool = bool(request.form.get('weight'))
         healthy: bool = bool(request.form.get('healthy'))
-        tattoos: bool = bool(request.form.get('tattoos'))
-
-        push_anwers(current_user.user_id, first_time, adult, weight, healthy, tattoos)  # push answers into database
+        tattoos: bool = not bool(request.form.get('tattoos'))
 
         # checks if the blood is donatable
         values = [adult, weight, healthy, tattoos]
+        print(values)
         not_donatable = []
         for value in values:
             if not value:
@@ -183,7 +181,7 @@ def checkdonator():
 
             else:
                 pass
-
+        print(not_donatable)
         if not_donatable:
             return render_template("not_donatable.html")
 

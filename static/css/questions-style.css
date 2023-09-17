@@ -40,8 +40,7 @@ form {
 }
 
 .answer {
-    margin: 30px;
-    margin-bottom: 50px;
+    margin: 30px 30px 50px;
     display: flex;
     justify-content: space-around;
 }
@@ -74,7 +73,6 @@ input[type="checkbox"] {
 }
 
 .btn-style1 {
-    border: none;
     text-align: center;
     color: var(--main-grey-color);
     background-color: var(--main-light-grey-color);
