@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 import utils
 # Internal imports
 from user import User
+from appointment import Appointment
 from utils import new_uid, check_spender, get_iserv_provider_cfg, push_anwers
 
 load_dotenv()
@@ -26,6 +27,7 @@ load_dotenv()
 ISERV_CLIENT_ID = os.getenv("ISERV_CLIENT_ID")
 ISERV_CLIENT_SECRET = os.getenv("ISERV_CLIENT_SECRET")
 ISERV_DISCOVERY_URL = os.getenv("ISERV_DISCORVERY_URL")
+TEMPLATES_AUTO_RELOAD = True
 
 # Flask app setup
 app = Flask(__name__)
@@ -173,33 +175,47 @@ def checkdonator():
 
         # checks if the blood is donatable
         values = [adult, weight, healthy, tattoos]
-        print(values)
         not_donatable = []
+
         for value in values:
             if not value:
                 not_donatable.append(value)
 
             else:
                 pass
-        print(not_donatable)
+
         if not_donatable:
             return render_template("not_donatable.html")
 
         else:
-            return redirect(url_for("termine"))
+            return redirect(url_for("appointments"))
 
     else:
         return redirect(url_for("index"))
 
 
-@app.route("/termine")
-def termine():
+@app.route("/appointments")
+def appointments():
     if current_user.is_authenticated:
-        return render_template("termine.html")
+        # REMOVE WHEN ADMIN PANEL IS ACTIVE
+        Appointment.add_appointment("18-09-2023")
+        return render_template("appointments.html",
+                               appointments=Appointment.get_appointment("18-09-2023"),
+                               appo=Appointment.free_slots)
 
     else:
         return redirect(url_for("index"))
 
+
+@app.route("/set_appointment", methods=["GET", "POST"])
+def set_appointment():
+    if current_user.is_authenticated:
+        time = request.args.get('time')
+        print(time)
+        return redirect(url_for("appointments"))
+
+    else:
+        return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    app.run(ssl_context="adhoc", port=5000)
+    app.run(ssl_context="adhoc", port=5000, use_reloader=True, debug=True)
