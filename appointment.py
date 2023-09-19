@@ -1,10 +1,11 @@
 from db import session, Appointments
 
-
 """
 
 The appointments are always from 10:00 a.m. to 3:00 p.m. 
 You can process 4 donors every quarter. -> 16 donors per hour -> 50 donors per appointment
+
+The from for the dates is following: "DD-MM-YYYY"
 
 """
 
@@ -24,7 +25,8 @@ class Appointment:
 
     @staticmethod
     def get_one(date, time):
-        appointment = session.query(Appointments).filter(Appointments.date == date, Appointments.time == time).first()
+        appointment = (session.query(Appointments).filter(Appointments.date == date, Appointments.time == str(time))
+                       .first())
         if not appointment:
             return None
 
@@ -32,8 +34,8 @@ class Appointment:
 
     @staticmethod
     def get_appointment(date):
-        dates = []
         appointments = session.query(Appointments).filter(Appointments.date == date).all()
+        return appointments
 
     @staticmethod
     def get_dates():
@@ -55,8 +57,8 @@ class Appointment:
                     time += 55  # first subtract 45 then add 100 to get the next full hour
                 else:
                     time += 15  # go to the next quarter
-                termin = Termin(date=date, time=time)
-                session.add(termin)
+                appointment = Appointments(date=date, time=str(time))
+                session.add(appointment)
             session.commit()
 
     @staticmethod
@@ -69,8 +71,22 @@ class Appointment:
 
     @staticmethod
     def reset_time(date, time):
-        appointment = session.query(Appointments).filter(Appointments.date == date, Appointments.time == time).first()
+        appointment = (session.query(Appointments).filter(Appointments.date == date, Appointments.time == str(time))
+                       .first())
         if not appointment:
             return None
 
+        appointment.delete()
+        new_appointment = Appointment(
+            date == appointment.date(),
+            time == appointment.time(),
+        )
+        session.add(new_appointment)
+        session.commit()
         return appointment
+
+    @staticmethod
+    def free_slots(date, time):
+        slot = session.query(Appointments).filter(Appointments.time == str(time),
+                                                  Appointments.date == date).first()
+        return slot.left_slots

@@ -37,8 +37,8 @@ class Appointments(Base):
     __tablename__ = "termine"
     id = Column(Integer, primary_key=True)
     date = Column(String(10))
-    time = Column(Integer)
-    spender_count = Column(Integer, default=0)
+    time = Column(String(4))
+    left_slots = Column(Integer, default=4)
     spender1 = Column(String(50))
     spender1_mail = Column(String(50))
     spender2 = Column(String(50))
@@ -50,6 +50,7 @@ class Appointments(Base):
 
     def __repr__(self) -> str:
         return (f"Appointments(date={self.date!r}, time={self.time!r},"
+                f"left_slots={self.left_slots!r}"
                 f"spender1={self.spender!r}), spender1_mail={self.spender_mail!r},"
                 f"spender2={self.spender2!r}, spender2_mail={self.spender2_mail!r},"
                 f"spender3={self.spender3!r}, spender3_mail={self.spender3_mail!r},"
