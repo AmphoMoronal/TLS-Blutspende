@@ -1,9 +1,9 @@
-from db import session, Appointments
+from db import session, Appointments, Doners
 
 """
 
 The appointments are always from 10:00 a.m. to 3:00 p.m. 
-You can process 4 donors every quarter. -> 16 donors per hour -> 50 donors per appointment
+You can process 4 donors every quarter. -> 16 donors per hour -> 80 donors per appointment
 
 The from for the dates is following: "DD-MM-YYYY"
 
@@ -25,7 +25,7 @@ class Appointment:
 
     @staticmethod
     def get_one(date, time):
-        appointment = (session.query(Appointments).filter(Appointments.date == date, Appointments.time == str(time))
+        appointment = (session.query(Appointments).filter(Appointments.date == date, Appointments.time == time)
                        .first())
         if not appointment:
             return None
@@ -38,7 +38,7 @@ class Appointment:
         return appointments
 
     @staticmethod
-    def get_dates():
+    def get_date():
         dates = []
         appointments = session.query(Appointments).all()
 
@@ -78,8 +78,8 @@ class Appointment:
 
         appointment.delete()
         new_appointment = Appointment(
-            date == appointment.date(),
-            time == appointment.time(),
+            date == appointment.date,
+            time == appointment.time,
         )
         session.add(new_appointment)
         session.commit()
@@ -90,3 +90,33 @@ class Appointment:
         slot = session.query(Appointments).filter(Appointments.time == str(time),
                                                   Appointments.date == date).first()
         return slot.left_slots
+
+    @staticmethod
+    def add_doner(date, time, doner_id):
+        slot = session.query(Appointments).filter(Appointments.time == time,
+                                                  Appointments.date == date).first()
+
+        doner = session.query(Doners).filter(Doners.user_id == doner_id).first()
+
+        if doner.appointment:
+            return
+
+        if slot.left_slots == 0:
+            return
+
+        elif slot.left_slots == 4:
+            slot.doner1 = doner_id
+
+        elif slot.left_slots == 3:
+            slot.doner2 = doner_id
+
+        elif slot.left_slots == 2:
+            slot.doner3 = doner_id
+
+        elif slot.left_slots == 1:
+            slot.doner4 = doner_id
+
+        slot.left_slots -= 1
+
+        doner.appointment = True
+        session.commit()

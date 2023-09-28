@@ -1,9 +1,8 @@
 from flask_login import UserMixin
+from db import session, Doners
 
-from db import session, Spender
 
-
-class User(UserMixin):
+class Doner(UserMixin):
     def __init__(self, id_, name, email):
         self.id = id_
         self.name = name
@@ -11,7 +10,7 @@ class User(UserMixin):
 
     @staticmethod
     def get(user_id):
-        spender = session.query(Spender).filter(Spender.user_id == user_id).first()
+        spender = session.query(Doners).filter(Doners.user_id == user_id).first()
         if not spender:
             return None
 
@@ -19,8 +18,9 @@ class User(UserMixin):
 
     @staticmethod
     def create(id_, name, email):
-        spender = Spender(name=name, email=email, user_id=id_)
+        spender = Doners(name=name, email=email, user_id=id_)
         if not spender:
             return None
         session.add(spender)
         session.commit()
+
