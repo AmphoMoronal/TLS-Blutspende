@@ -211,8 +211,9 @@ def set_appointment():
         time = request.args.get('time'),
         date = Appointment.get_date()[0]
         Appointment.add_doner(date, time[0], current_user.user_id)
+        utils.send_confirmation_email(current_user, date, time[0])
         return render_template("confirmation.html", time_slot=time[0], date=date,
-                               current_user=current_user, confirmation=utils.send_confirmation_email)
+                               current_user=current_user)
 
     else:
         return redirect(url_for("index"))
