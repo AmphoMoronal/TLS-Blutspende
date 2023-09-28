@@ -17,9 +17,9 @@ from dotenv import load_dotenv
 
 import utils
 # Internal imports
-from user import User
+from doner import Doner
 from appointment import Appointment
-from utils import new_uid, check_spender, get_iserv_provider_cfg, push_anwers
+from utils import new_uid, check_doner, get_iserv_provider_cfg
 
 load_dotenv()
 
@@ -33,11 +33,9 @@ TEMPLATES_AUTO_RELOAD = True
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY") or os.urandom(24)
 
-
 # User session management setup
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 
 # OAuth client setup
 client = WebApplicationClient(ISERV_CLIENT_ID)
@@ -46,7 +44,7 @@ client = WebApplicationClient(ISERV_CLIENT_ID)
 # Flask-Login helper to retrieve a user from our db
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return Doner.get(user_id)
 
 
 # Index route which is the first route the users see
@@ -65,18 +63,18 @@ def index():
 def login():
     users_name = request.form["name"]
     users_email = request.form["email"]
-    unique_id = check_spender(users_email)
+    unique_id = check_doner(users_email)
     if not unique_id:
         unique_id = new_uid()
 
     # Create a user in your db with the information provided
-    user = User(
+    user = Doner(
         id_=unique_id, name=users_name, email=users_email
     )
 
     # Add User to the database
-    if not User.get(unique_id):
-        User.create(unique_id, users_name, users_email)
+    if not Doner.get(unique_id):
+        Doner.create(unique_id, users_name, users_email)
 
     # Begin user session by logging the user in
     login_user(user)
@@ -135,13 +133,13 @@ def callback():
     users_name = userinfo_response.json()["name"]
 
     # Create a user in your db with the information provided
-    user = User(
+    user = Doner(
         id_=unique_id, name=users_name, email=users_email
     )
 
     # User doesn't exist? Add it to the database.
-    if not User.get(unique_id):
-        User.create(unique_id, users_name, users_email)
+    if not Doner.get(unique_id):
+        Doner.create(unique_id, users_name, users_email)
 
     # Begin user session by logging the user in
     login_user(user)
@@ -201,7 +199,7 @@ def appointments():
         Appointment.add_appointment("18-09-2023")
         return render_template("appointments.html",
                                appointments=Appointment.get_appointment("18-09-2023"),
-                               appo=Appointment.free_slots)
+                               free_slots=Appointment.free_slots)
 
     else:
         return redirect(url_for("index"))
@@ -210,12 +208,15 @@ def appointments():
 @app.route("/set_appointment", methods=["GET", "POST"])
 def set_appointment():
     if current_user.is_authenticated:
-        time = request.args.get('time')
-        print(time)
-        return redirect(url_for("appointments"))
+        time = request.args.get('time'),
+        date = Appointment.get_date()[0]
+        Appointment.add_doner(date, time[0], current_user.user_id)
+        return render_template("confirmation.html", time_slot=time[0], date=date,
+                               current_user=current_user, confirmation=utils.send_confirmation_email)
 
     else:
         return redirect(url_for("index"))
 
+
 if __name__ == "__main__":
-    app.run(ssl_context="adhoc", port=5000, use_reloader=True, debug=True)
+    app.run(ssl_context="adhoc", port=5000, use_reloader=True)

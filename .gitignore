@@ -20,6 +20,7 @@ docs/_build/
 Flyer/
 AdobeXD-Designs.xd
 test.db
+mail.py
 
 # Coverage reports
 htmlcov/

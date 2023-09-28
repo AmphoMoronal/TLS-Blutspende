@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for i in appointments %}
-        <a href="/set_appointment?time={{ i.time }}">{{ i.time[:2] }}:{{ i.time[2:] }} ({{ appo("18-09-2023", i.time) }})</a>
+        <a href="/set_appointment?time={{ i.time }}">{{ i.time[:2] }}:{{ i.time[2:] }} ({{ free_slots("18-09-2023", i.time) }})</a>
     {%endfor%}
 </body>
 </html>
