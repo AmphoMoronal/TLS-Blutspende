@@ -57,7 +57,7 @@ def get_iserv_provider_cfg():
 def send_confirmation_email(current_user, date, time):
     subject = "Erfolgreiche Buchung Ihres Blutspendentermines"
     body = (f"Guten Tag {current_user.name},\nDies ist ihre Buchungsbestätigung.\n\n"
-            f"Ihr termin findet am {date} um {time} statt. \n"
+            f"Ihr termin findet am {date.replace('-', '.', 2)} um {time[:2]}:{time[2:]} statt. \n"
             f"Bitte kommen Sie in Raum 40 in der Theodor-Litt Schule in Gießen\n"
             f"\nMit freundlichen Grüßen\n"
             f"Ihr Blutspendeteam der Theodor-Litt Schule Gießen in Kooperation des UKGM Gießen - Marburg\n"
