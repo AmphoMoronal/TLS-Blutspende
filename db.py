@@ -22,10 +22,12 @@ class Doners(Base):
     user_id = Column(String, unique=True)
     is_authenticated = Column(Boolean, default=True)
     appointment = Column(Boolean, default=False)
+    admin = Column(Boolean, default=False)
 
     def __repr__(self) -> str:
         return f"Doners(id={self.id!r}, name={self.name!r}, email={self.email!r}, user_id={self.user_id!r}," \
-               f" is_authenticated={self.is_authenticated!r}), appointment={self.appointment!r}"
+               f" is_authenticated={self.is_authenticated!r}, appointment={self.appointment!r}, " \
+               f"admin={self.admin})"
 
 
 class Appointments(Base):
@@ -44,5 +46,6 @@ class Appointments(Base):
                f"date={self.date!r}, left_slots={self.left_slots!r}" \
                f"doner1={self.doner1!r}), doner2={self.doner2!r}," \
                f"doner3={self.doner3!r}, doner4={self.doner4!r}"
+
 
 Base.metadata.create_all(engine)

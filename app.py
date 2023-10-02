@@ -211,13 +211,22 @@ def set_appointment():
         time = request.args.get('time'),
         date = Appointment.get_date()[0]
         Appointment.add_doner(date, time[0], current_user.user_id)
-        utils.send_confirmation_email(current_user, date, time[0])
+        if not current_user.appointment:
+            utils.send_confirmation_email(current_user, date, time[0])
         return render_template("confirmation.html", time_slot=time[0], date=date,
                                current_user=current_user)
 
     else:
         return redirect(url_for("index"))
 
+
+@app.route("/admin")
+def admin():
+    if current_user.admin:
+        return render_template("admin.html")
+
+    else:
+        return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc", port=5000, use_reloader=True)
