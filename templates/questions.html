@@ -13,7 +13,6 @@
     <img src="../static/img/Blood-LeftBottom.svg" class="Blood-LeftBottom" alt="Left-Blood">
     <main>
         <form method="POST" action="/checkdonator">
-
             <div class="card">
                 <b>Sind Sie im Alter zwischen 18 und 60 Jahre?</b>
                 <div class="answer">
@@ -79,6 +78,9 @@
                 Vergessen Sie nicht vor und nach der Blutspende außreichend zu trinken!</p>
         </form>
     </main>
+    {% if current_user.admin %}
+        	<a class="admin" href="/admin">admin</a>
+    {% endif %}
     <img src="../static/img/Blood-RightTop.svg" class="Blood-RightTop" alt="Right-Blood">
 </body>
 </html>

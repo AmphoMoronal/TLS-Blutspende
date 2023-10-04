@@ -123,3 +123,8 @@ p {
     right: 0;
     top: 0;
 }
+
+.admin {
+    right: 10%;
+    top: 10%;
+}
