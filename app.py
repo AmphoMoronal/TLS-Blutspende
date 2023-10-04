@@ -157,7 +157,7 @@ def logout():
 @app.route("/questions")
 def questions():
     if current_user.is_authenticated:
-        return render_template("questions.html")
+        return render_template("questions.html", current_user=current_user)
 
     else:
         return redirect(url_for("index"))
@@ -223,7 +223,8 @@ def set_appointment():
 @app.route("/admin")
 def admin():
     if current_user.admin:
-        return render_template("admin.html")
+        data = Appointment.get_appointment(Appointment.get_dates()[-1])
+        return render_template("admin.html", data=data, doner=Doner.get)
 
     else:
         return redirect(url_for("index"))

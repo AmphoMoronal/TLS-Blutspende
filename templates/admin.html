@@ -5,6 +5,12 @@
     <title>Admin Panel</title>
 </head>
 <body>
-
+    {% for i in data %}
+        <p>{{ i.time[:2] }}:{{ i.time[2:] }}</p>
+        <p>{{ doner(i.doner1).name }}</p>
+        <p>{{ doner(i.doner2).name }}</p>
+        <p>{{ doner(i.doner3).name }}</p>
+        <p>{{ doner(i.doner4).name }}</p>
+    {%endfor%}
 </body>
 </html>

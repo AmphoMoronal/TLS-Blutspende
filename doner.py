@@ -10,11 +10,11 @@ class Doner(UserMixin):
 
     @staticmethod
     def get(user_id):
-        spender = session.query(Doners).filter(Doners.user_id == user_id).first()
-        if not spender:
+        doner = session.query(Doners).filter(Doners.user_id == user_id).first()
+        if not doner:
             return None
 
-        return spender
+        return doner
 
     @staticmethod
     def create(id_, name, email):

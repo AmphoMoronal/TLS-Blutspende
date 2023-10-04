@@ -38,7 +38,7 @@ class Appointment:
         return appointments
 
     @staticmethod
-    def get_date():
+    def get_dates():
         dates = []
         appointments = session.query(Appointments).all()
 

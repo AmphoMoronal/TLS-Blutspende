@@ -43,9 +43,9 @@ class Appointments(Base):
 
     def __repr__(self) -> str:
         return f"Appointments(date={self.date!r}, time={self.time!r}," \
-               f"date={self.date!r}, left_slots={self.left_slots!r}" \
-               f"doner1={self.doner1!r}), doner2={self.doner2!r}," \
-               f"doner3={self.doner3!r}, doner4={self.doner4!r}"
+               f"left_slots={self.left_slots!r}," \
+               f"doner1={self.doner1!r}, doner2={self.doner2!r}," \
+               f"doner3={self.doner3!r}, doner4={self.doner4!r})"
 
 
 Base.metadata.create_all(engine)
