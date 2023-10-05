@@ -208,10 +208,11 @@ def appointments():
 @app.route("/set_appointment", methods=["GET", "POST"])
 def set_appointment():
     if current_user.is_authenticated:
+        appointment_check = current_user.appointment
         time = request.args.get('time'),
-        date = Appointment.get_date()[0]
+        date = Appointment.get_dates()[0]
         Appointment.add_doner(date, time[0], current_user.user_id)
-        if not current_user.appointment:
+        if not appointment_check:
             utils.send_confirmation_email(current_user, date, time[0])
         return render_template("confirmation.html", time_slot=time[0], date=date,
                                current_user=current_user)
@@ -222,7 +223,9 @@ def set_appointment():
 
 @app.route("/admin")
 def admin():
-    if current_user.admin:
+    if current_user.is_authenticated and current_user.admin:
+        # first get the date of the last registration time
+        # then get from this date all appointments
         data = Appointment.get_appointment(Appointment.get_dates()[-1])
         return render_template("admin.html", data=data, doner=Doner.get)
 
