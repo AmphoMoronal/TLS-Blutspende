@@ -38,15 +38,19 @@ class Appointment:
         return appointments
 
     @staticmethod
-    def get_dates():
-        dates = []
-        appointments = session.query(Appointments).all()
+    def get_dates(open_appointment=False):
+        if not open_appointment:
+            dates = []
+            appointments = session.query(Appointments).all()
 
-        for appointment in appointments:
-            if appointment.date not in dates:
-                dates.append(appointment.date)
+            for appointment in appointments:
+                if appointment.date not in dates:
+                    dates.append(appointment.date)
 
-        return dates
+            return dates
+
+        if open_appointment:
+            pass
 
     @staticmethod
     def add_appointment(date):
@@ -68,6 +72,7 @@ class Appointment:
             for appointment in appointments:
                 session.delete(appointment)
             session.commit()
+            print("deleted appointment", date)
 
     @staticmethod
     def reset_time(date, time):

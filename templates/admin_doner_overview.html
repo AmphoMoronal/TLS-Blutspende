@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <table>
+        {{ print(data) }}
+        {% if data %}
+        <caption>Spender des Spendetermines am {{ data[0].date.replace("-", ".") }}</caption>
+        <tr>
+            <th>Zeit</th>
+            <th>Spender 1</th>
+            <th>Spender 2</th>
+            <th>Spender 3</th>
+            <th>Spender 4</th>
+        </tr>
+            {% for i in data %}
+                <tr>
+                    <td>{{ i.time[:2] }}:{{ i.time[2:] }}</td>
+                    <td>{{ doner(i.doner1).name }}</td>
+                    <td>{{ doner(i.doner2).name }}</td>
+                    <td>{{ doner(i.doner3).name }}</td>
+                    <td>{{ doner(i.doner4).name }}</td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <caption>Aktuell stehen keine Termine an.</caption>
+        {% endif %}
+
+    </table>
+</body>
+</html>

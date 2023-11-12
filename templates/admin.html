@@ -1,28 +1,12 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
 </head>
 <body>
-    <table>
-        <caption>Spender des Spendetermines am {{ data[0].date.replace("-", ".") }}</caption>
-        <tr>
-            <th>Zeit</th>
-            <th>Spender 1</th>
-            <th>Spender 2</th>
-            <th>Spender 3</th>
-            <th>Spender 4</th>
-        </tr>
-        {% for i in data %}
-            <tr>
-                <td>{{ i.time[:2] }}:{{ i.time[2:] }}</td>
-                <td>{{ doner(i.doner1).name }}</td>
-                <td>{{ doner(i.doner2).name }}</td>
-                <td>{{ doner(i.doner3).name }}</td>
-                <td>{{ doner(i.doner4).name }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <p>So übersicht mit Auswahl was man haben will oder so. Schreib mich an wenn du hier bist :)</p>
+    <a href="/admin/termine">Terminverwaltung</a>
+    <a href="/admin/spender">Terminübersicht</a>
 </body>
 </html>
