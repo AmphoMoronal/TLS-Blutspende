@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Terminbearbeitung</title>
+</head>
+<body>
+    {% for date in dates %}
+    	<a>{{ date }}</a>
+        {{ print(date) }}
+{#        <button type="button" onclick="{{ delete(date) }}">delete {{ date }}</button>#}
+        <br>
+    {% endfor %}
+
+</body>
+</html>

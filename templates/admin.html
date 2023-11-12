@@ -5,12 +5,8 @@
     <title>Admin Panel</title>
 </head>
 <body>
-    {% for i in data %}
-        <p>{{ i.time[:2] }}:{{ i.time[2:] }}</p>
-        <p>{{ doner(i.doner1).name }}</p>
-        <p>{{ doner(i.doner2).name }}</p>
-        <p>{{ doner(i.doner3).name }}</p>
-        <p>{{ doner(i.doner4).name }}</p>
-    {%endfor%}
+    <p>So übersicht mit Auswahl was man haben will oder so. Schreib mich an wenn du hier bist :)</p>
+    <a href="/admin/termine">Terminverwaltung</a>
+    <a href="/admin/spender">Terminübersicht</a>
 </body>
 </html>
