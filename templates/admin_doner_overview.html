@@ -6,7 +6,6 @@
 </head>
 <body>
     <table>
-        {{ print(data) }}
         {% if data %}
         <caption>Spender des Spendetermines am {{ data[0].date.replace("-", ".") }}</caption>
         <tr>
@@ -19,10 +18,10 @@
             {% for i in data %}
                 <tr>
                     <td>{{ i.time[:2] }}:{{ i.time[2:] }}</td>
-                    <td>{{ doner(i.doner1).name }}</td>
-                    <td>{{ doner(i.doner2).name }}</td>
-                    <td>{{ doner(i.doner3).name }}</td>
-                    <td>{{ doner(i.doner4).name }}</td>
+                    <td>{{ i.doner1.name }}</td>
+                    <td>{{ i.doner2.name }}</td>
+                    <td>{{ i.doner3.name }}</td>
+                    <td>{{ i.doner4.name }}</td>
                 </tr>
             {% endfor %}
 

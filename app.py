@@ -224,6 +224,7 @@ def set_appointment():
 @app.route("/admin")
 def admin():
     if current_user.is_authenticated and current_user.admin:
+        Appointment.add_appointment("18-11-2023")
         # first get the date of the last registration time
         # then get from this date all appointments
         data = Appointment.get_appointment(Appointment.get_dates()[-1])
@@ -231,6 +232,26 @@ def admin():
 
     else:
         return redirect(url_for("index"))
+
+
+@app.route("/admin/termine")
+def admin_appointments():
+    if current_user.is_authenticated and current_user.admin:
+        Appointment.add_appointment("18-11-2023")
+        # first get the date of the last registration time
+        # then get from this date all appointments
+        data = Appointment.get_appointment(Appointment.get_dates()[-1])
+        return render_template("admin_doner_overview.html", data=data, doner=Doner.get, print=print)
+
+    else:
+        return redirect(url_for("index"))
+
+
+@app.route("/admin/spender")
+def admin_doners():
+    if current_user.is_authenticated and current_user.admin:
+        data = Appointment.get_appointment(Appointment.get_dates()[-1])
+        return render_template("admin_doner_overview.html", data=data, print=print)
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc", port=5000, use_reloader=True)
