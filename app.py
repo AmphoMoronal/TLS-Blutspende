@@ -209,7 +209,7 @@ def appointments():
 def set_appointment():
     if current_user.is_authenticated:
         time = request.args.get('time'),
-        date = Appointment.get_date()[0]
+        date = Appointment.get_dates()[0]
         Appointment.add_doner(date, time[0], current_user.user_id)
         if not current_user.appointment:
             utils.send_confirmation_email(current_user, date, time[0])
