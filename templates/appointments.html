@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Termine</title>
+
+    <link rel="stylesheet" href="../static/css/variables.css">
+    <link rel="stylesheet" href="../static/css/appointments-style.css">
 </head>
 <body>
-    {% for i in appointments %}
-        <a href="/set_appointment?time={{ i.time }}">{{ i.time[:2] }}:{{ i.time[2:] }} ({{ free_slots("18-09-2023", i.time) }})</a>
-    {%endfor%}
+    <img src="../static/img/Blood-LeftBottom.svg" class="Blood-LeftBottom" alt="Bloot Left Bottom">
+    <main>
+        <h1>Welchen Termin hätten sie gern?</h1>
+        {% for i in appointments %}
+            <a href="/set_appointment?time={{ i.time }}">{{ i.time[:2] }}:{{ i.time[2:] }} 
+                <br> Freie Plätze: {{ free_slots("18-09-2023", i.time) }}</a>
+        {%endfor%}
+    </main>
+    <img src="../static/img/Blood-RightTop.svg" class="Blood-RightTop" alt="Blood Right Top">
 </body>
 </html>

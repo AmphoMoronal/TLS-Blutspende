@@ -108,9 +108,18 @@ hr {
 }
 
 @media (max-width: 1024px) {
-    /* CSS-Anpassungen für mittlere Bildschirme (Tablets) */
+    
 }
 
 @media (max-width: 768px) {
-    /* CSS-Anpassungen für kleine Bildschirme */
+    main {
+        width: 100vw;
+        height: 100vh;
+        margin: auto;
+
+    }
+
+    .Blood-LeftBottom, .Blood-RightTop {
+        visibility: hidden;
+    }
 }
